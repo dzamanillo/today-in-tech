@@ -67,7 +67,7 @@ router.post("/", (req, res) => {
 });
 
 // User login
-// /api/login
+// /api/users/login
 router.post("/login", (req, res) => {
 	User.findOne({
 		where: {
@@ -97,7 +97,7 @@ router.post("/login", (req, res) => {
 });
 
 // User logout
-// /api/logout
+// /api/users/logout
 router.post("/logout", (res, req) => {
 	if (req.session.loggedIn) {
 		req.session.destroy(() => {
@@ -120,6 +120,27 @@ router.put("/:id", (req, res) => {
 		.then((dbUserData) => {
 			if (!dbUserData[0]) {
 				res.status(404).json({ message: "No user found with this id" });
+				return;
+			}
+			res.json(dbUserData);
+		})
+		.catch((err) => {
+			console.log(err);
+			res.status(500).json(err);
+		});
+});
+
+// delete user
+// /api/users/id
+router.delete("/:id", (req, res) => {
+	User.destroy({
+		where: {
+			id: req.params.id,
+		},
+	})
+		.then((dbUserData) => {
+			if (!dbUserData) {
+				res.status(400).json({ message: "No user with that ID found." });
 				return;
 			}
 			res.json(dbUserData);
