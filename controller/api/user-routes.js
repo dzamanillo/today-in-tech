@@ -6,6 +6,11 @@ const { User, Post, Comment } = require("../../models");
 router.get("/", (req, res) => {
 	User.findAll({
 		attributes: { exclude: ["password"] },
+
+		include: {
+			model: Post,
+			attributes: ["title"],
+		},
 	})
 		.then((dbUserData) => {
 			res.json(dbUserData);
@@ -19,16 +24,18 @@ router.get("/", (req, res) => {
 // Get single user
 // /api/users/:id
 router.get("/:id", (req, res) => {
-	User.findOne(
-		{
-			where: {
-				id: req.params.id,
-			},
+	User.findOne({
+		where: {
+			id: req.params.id,
 		},
-		{
-			attributes: { exclude: ["password"] },
-		}
-	)
+
+		attributes: { exclude: ["password"] },
+
+		include: {
+			model: Post,
+			attributes: ["title"],
+		},
+	})
 		.then((dbUserData) => {
 			if (!dbUserData) {
 				res.status(404).json({ message: "No user found with this id" });
