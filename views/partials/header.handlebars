@@ -20,17 +20,23 @@
 				<li class="nav-item">
 					<a class="nav-link" href="/">Dashboard</a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="/login">Login</a>
-				</li>
-				<li class="nav-item">
-					<a
-						class="nav-link"
-						href="#"
-						tabindex="-1"
-						aria-disabled="true"
-					>Logout</a>
-				</li>
+				{{#if loggedIn}}
+					<li class="nav-item">
+						<a
+							class="nav-link"
+							href="/login"
+							tabindex="-1"
+							aria-disabled="true"
+						>{{username}}, Logout</a>
+					</li>
+				{{/if}}
+				{{#unless loggedIn}}
+
+					<li class="nav-item">
+						<a class="nav-link" href="/login">Login</a>
+					</li>
+				{{/unless}}
+
 			</ul>
 		</div>
 	</div>
