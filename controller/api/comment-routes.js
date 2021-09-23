@@ -32,7 +32,6 @@ router.post("/", (req, res) => {
 		post_id: req.body.post_id,
 	})
 		.then((dbCommentData) => {
-			console.log(dbCommentData);
 			const url = `/api/posts/${dbCommentData.post_id}`;
 
 			res.redirect(url);
