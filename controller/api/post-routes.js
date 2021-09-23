@@ -39,9 +39,27 @@ router.get("/:id", (req, res) => {
 			model: User,
 			attributes: ["username"],
 		},
+		include: {
+			model: Comment,
+			attributes: ["comment_text"],
+			include: {
+				model: User,
+				attributes: ["username"],
+			},
+		},
 	})
 		.then((dbPostData) => {
-			res.status(200).json(dbPostData);
+			const post = dbPostData.get({ plain: true });
+			console.log("post: ", post);
+
+			const { comments } = post;
+			console.log("comments: ", comments);
+			const data = {
+				session: req.session,
+				post: post,
+				comments: comments,
+			};
+			res.render("single-post", data);
 		})
 		.catch((err) => {
 			console.log(err);

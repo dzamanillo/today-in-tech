@@ -1,0 +1,26 @@
+{{>header}}
+<article class="container d-flex flex-column">
+	<div class="d-flex justify-content-between align-items-center">
+		<div>
+			<h2>{{post.title}}</h2>
+
+			<p>{{post.post_content}}</p>
+	
+	</div>
+
+</article>
+
+<div class="container">
+    <form action="/api/comments" method="POST">
+    <label for="comment_text">Comment: </label>
+    <textarea name="comment_text" id="" cols="30" rows="5"></textarea>
+    <input type="text" name="post_id" value="{{post.id}}" class="d-none">
+    <button class="btn btn-success">Submit</button>
+    </form>
+</div>
+
+<div class="container">
+    {{#each comments}}
+    {{>comment}}
+    {{/each}}
+</div>

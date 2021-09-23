@@ -43,8 +43,8 @@ router.get("/dashboard", (req, res) => {
 	});
 });
 
+// Home page
 router.get("/", (req, res) => {
-	console.log("======================");
 	Post.findAll({
 		attributes: ["id", "post_content", "title"],
 		include: {
