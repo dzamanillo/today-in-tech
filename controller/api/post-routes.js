@@ -58,7 +58,7 @@ router.post("/", (req, res) => {
 		user_id: req.session.user_id,
 	})
 		.then((dbUserData) => {
-			res.json(dbUserData);
+			res.redirect("/dashboard");
 		})
 		.catch((err) => {
 			console.log(err);

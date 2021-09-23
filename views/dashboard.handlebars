@@ -1,0 +1,26 @@
+{{> header}}
+
+	<div class="card border-success p-2 dash-card login-signup-card ">
+	<form action="/api/posts" method="POST" class="d-flex flex-column align-items-end m-3">
+		<div class="d-flex flex-column align-content-center align-items-center align-self-center">
+            <h2 class="display-2">Create a New Post</h2>
+            <div class="post-title d-flex mt-2">
+                <label for="title">Title: </label>
+                <input type="text" id="title" name="title" />
+            </div>
+            <div class="login-password d-flex mt-2">
+                <label for="post_content">Content: </label>
+                <textarea name="post_content" id="post-content" cols="30" rows="10"></textarea>
+            </div>
+        </div>
+		<div class="login-btn align-self-center mt-5">
+			<button class="btn btn-success" id="btn-login">Submit Post</button>
+		</div>
+	</form>
+</div>	
+
+<div>
+    {{#each posts}}
+    {{> dash-post-info}}
+    {{/each}}
+</div>
