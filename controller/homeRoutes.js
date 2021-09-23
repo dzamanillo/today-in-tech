@@ -23,12 +23,7 @@ router.get("/dashboard", (req, res) => {
 			user_id: req.session.user_id,
 		},
 	}).then((dbPostData) => {
-		console.log("req.session: ", req.session);
-
-		console.log("dbPostData: ", dbPostData);
-
 		const post = dbPostData.map((post) => post.get({ plain: true }));
-		console.log("post: ", post);
 
 		if (req.session.loggedIn) {
 			const data = {
@@ -53,8 +48,6 @@ router.get("/", (req, res) => {
 		},
 	})
 		.then((dbPostData) => {
-			console.log(dbPostData);
-
 			const posts = dbPostData.map((post) => post.get({ plain: true }));
 
 			res.render("homepage", {

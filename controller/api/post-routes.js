@@ -50,10 +50,9 @@ router.get("/:id", (req, res) => {
 	})
 		.then((dbPostData) => {
 			const post = dbPostData.get({ plain: true });
-			console.log("post: ", post);
 
 			const { comments } = post;
-			console.log("comments: ", comments);
+
 			const data = {
 				session: req.session,
 				post: post,
