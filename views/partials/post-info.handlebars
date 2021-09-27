@@ -1,9 +1,11 @@
-<article>
+<article class="border m-2 p-2">
 	<div class="d-flex justify-content-between align-items-center">
 		<a href="/api/posts/{{id}}">
 			<h2>{{title}}</h2>
 		</a>
-		<h3>By {{user.username}}</h3>
+		<h3>By {{user.username}} on {{format_date created_at}}</h3>
 	</div>
 	<p>{{post_content}}</p>
+	<br />
+	<p>{{comments.length}} Comment(s)</p>
 </article>

@@ -22,9 +22,10 @@ router.get("/dashboard", (req, res) => {
 		where: {
 			user_id: req.session.user_id,
 		},
+		order: [["created_at", "DESC"]],
 	}).then((dbPostData) => {
 		const post = dbPostData.map((post) => post.get({ plain: true }));
-
+		console.log("post: ", post);
 		if (req.session.loggedIn) {
 			const data = {
 				session: req.session,
@@ -41,11 +42,18 @@ router.get("/dashboard", (req, res) => {
 // Home page
 router.get("/", (req, res) => {
 	Post.findAll({
-		attributes: ["id", "post_content", "title"],
-		include: {
-			model: User,
-			attributes: ["username"],
-		},
+		attributes: ["id", "post_content", "title", "created_at"],
+		include: [
+			{
+				model: User,
+				attributes: ["username"],
+			},
+			{
+				model: Comment,
+				attributes: ["id", "comment_text", "user_id", "post_id"],
+			},
+		],
+		order: [["created_at", "DESC"]],
 	})
 		.then((dbPostData) => {
 			const posts = dbPostData.map((post) => post.get({ plain: true }));
