@@ -1,7 +1,10 @@
-<div>
-	<strong>{{user.username}}</strong>
-	says:
-</div>
-<div>
+<article class="border m-2 p-2">
+	<div class="d-flex justify-content-between align-items-center">
+
+		<h3 class="display-6 comment-header">By
+			{{user.username}}
+			on
+			{{format_date created_at}}</h3>
+	</div>
 	<p>{{comment_text}}</p>
-</div>
+</article>

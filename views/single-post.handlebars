@@ -1,21 +1,27 @@
 {{>header}}
-<article class="container d-flex flex-column">
+
+<article class="border m-2 p-2">
 	<div class="d-flex justify-content-between align-items-center">
-		<div>
-			<h2>{{post.title}}</h2>
-
-			<p>{{post.post_content}}</p>
-	
+		<a href="/api/posts/{{id}}">
+			<h2 class="display-4">{{post.title}}</h2>
+		</a>
+		<h3 class="display-6 post-credits">By {{post.user.username}} on {{format_date post.createdAt}}</h3>
 	</div>
-
+	<p>{{post.post_content}}</p>
+	<br />
+	<p >{{post.comments.length}} Comment(s)</p>
 </article>
 
-<div class="container">
+
+
+<div class="container border-bottom">
     <form action="/api/comments" method="POST">
-    <label for="comment_text">Comment: </label>
-    <textarea name="comment_text" id="" cols="30" rows="5"></textarea>
+    <div class="d-flex justify-content-center align-items-center">
+    <label class="display-6 m-2" for="comment_text">Comment: </label>
+    <textarea class="m-2" name="comment_text" id="comment-text-area" cols="30" rows="5"></textarea>
     <input type="text" name="post_id" value="{{post.id}}" class="d-none">
-    <button class="btn btn-success">Submit</button>
+    <button class="btn btn-success m-2">Submit</button>
+    </div>
     </form>
 </div>
 

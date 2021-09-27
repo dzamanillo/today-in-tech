@@ -35,22 +35,24 @@ router.get("/:id", (req, res) => {
 			id: req.params.id,
 		},
 
-		include: {
-			model: User,
-			attributes: ["username"],
-		},
-		include: {
-			model: Comment,
-			attributes: ["comment_text"],
-			include: {
+		include: [
+			{
 				model: User,
 				attributes: ["username"],
 			},
-		},
+			{
+				model: Comment,
+				attributes: ["comment_text", "created_at"],
+				include: {
+					model: User,
+					attributes: ["username"],
+				},
+			},
+		],
 	})
 		.then((dbPostData) => {
 			const post = dbPostData.get({ plain: true });
-
+			console.log("post: ", post);
 			const { comments } = post;
 
 			const data = {

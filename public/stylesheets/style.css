@@ -10,3 +10,15 @@ a {
 	color: black;
 	text-decoration: none;
 }
+
+#comment-text-area {
+	width: 80vw;
+}
+
+.comment-header {
+	font-size: 1.5rem;
+}
+
+.post-credits {
+	font-size: 2rem;
+}
