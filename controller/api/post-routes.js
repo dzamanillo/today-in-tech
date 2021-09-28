@@ -52,7 +52,7 @@ router.get("/:id", (req, res) => {
 	})
 		.then((dbPostData) => {
 			const post = dbPostData.get({ plain: true });
-			console.log("post: ", post);
+
 			const { comments } = post;
 
 			const data = {
@@ -85,18 +85,18 @@ router.post("/", (req, res) => {
 		});
 });
 
-// TODO edit post
 // api/posts/:id
-router.put("/:id", (req, res) => {
+router.put("/edit", (req, res) => {
 	Post.update(
-		{
-			where: {
-				id: req.params.id,
-			},
-		},
 		{
 			title: req.body.title,
 			post_content: req.body.post_content,
+			user_id: req.session.user_id,
+		},
+		{
+			where: {
+				id: req.body.id,
+			},
 		}
 	)
 		.then((dbPostData) => {
@@ -104,7 +104,7 @@ router.put("/:id", (req, res) => {
 				res.status(400).json({ message: "No user found with that ID." });
 				return;
 			}
-			res.json(dbPostData);
+			res.send("you did it");
 		})
 		.catch((err) => {
 			console.log(err);

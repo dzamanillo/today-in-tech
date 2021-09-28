@@ -25,7 +25,7 @@ router.get("/dashboard", (req, res) => {
 		order: [["created_at", "DESC"]],
 	}).then((dbPostData) => {
 		const post = dbPostData.map((post) => post.get({ plain: true }));
-		console.log("post: ", post);
+
 		if (req.session.loggedIn) {
 			const data = {
 				session: req.session,
@@ -36,6 +36,23 @@ router.get("/dashboard", (req, res) => {
 		} else {
 			res.redirect("/login");
 		}
+	});
+});
+
+router.get("/edit/:id", (req, res) => {
+	Post.findOne({
+		where: {
+			id: req.params.id,
+		},
+	}).then((dbPostData) => {
+		const post = dbPostData.get({ plain: true });
+
+		const data = {
+			session: req.session,
+			post: post,
+		};
+
+		res.render("edit-post", data);
 	});
 });
 

@@ -1,0 +1,24 @@
+{{> header}}
+
+	<div class="card border-success m-2 p-2 dash-card login-signup-card ">
+	<div class="d-flex flex-column align-items-end m-3">
+		<div class="d-flex flex-column align-content-center align-items-center align-self-center">
+            <h2 class="display-2">Edit</h2>
+            <div class="post-title d-flex mt-2">
+                <label for="title">Title: </label>
+                <input type="text" id="title" name="title" value="{{post.title}}" />
+                <p class="d-none" id="edit-id">{{post.id}}</p>
+                
+            </div>
+            <div class="login-password d-flex mt-2">
+                <label for="post_content">Content: </label>
+                <textarea name="post_content" id="post-content" cols="30" rows="10" >{{post.post_content}}</textarea>
+            </div>
+        </div>
+		<div class="login-btn align-self-center mt-5">
+			<button onclick="editHandler()" class="btn btn-success" id="btn-login">Submit Post</button>
+		</div>
+	</div>
+</div>
+
+<script src="/javascript/edit-post.js"></script>
