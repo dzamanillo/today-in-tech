@@ -82,14 +82,21 @@ router.post("/login", (req, res) => {
 		},
 	}).then((dbUserData) => {
 		if (!dbUserData) {
-			res.status(400).json({ message: "No user with that username" });
+			const data = {
+				error: true,
+			};
+
+			res.status(400).render("login", data);
 			return;
 		}
 
 		const validPassword = dbUserData.checkPassword(req.body.password);
 
 		if (!validPassword) {
-			res.status(400).json({ message: "Incorrect Password" });
+			const data = {
+				error: true,
+			};
+			res.status(400).render("login", data);
 			return;
 		}
 
@@ -97,6 +104,7 @@ router.post("/login", (req, res) => {
 			req.session.user_id = dbUserData.id;
 			req.session.username = dbUserData.username;
 			req.session.loggedIn = true;
+			error = false;
 
 			res.redirect("/");
 		});
