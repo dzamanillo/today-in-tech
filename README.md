@@ -17,11 +17,11 @@ Today in Tech is a CRUD web application which allows users to read, write and co
 
 ## Website:
 
-- [Deploy](https://password-manager-gadaell.herokuapp.com/)
+- [Deploy](https://today-in-tech.herokuapp.com/)
 
 ## GitHub Repo:
 
-- [GitHub](https://github.com/gadaell/Password-Manager)
+- [GitHub](https://github.com/dzamanillo/today-in-tech)
 
 ## Contribution
 
