@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const { User, Post, Comment } = require("../../models");
+const withAuth = require("../../utils/auth");
 
 //get all posts
 // /api/posts
@@ -29,7 +30,7 @@ router.get("/", (req, res) => {
 
 // get a post
 // /api/posts/id
-router.get("/:id", (req, res) => {
+router.get("/:id", withAuth, (req, res) => {
 	Post.findOne({
 		where: {
 			id: req.params.id,
@@ -61,11 +62,7 @@ router.get("/:id", (req, res) => {
 				comments: comments,
 			};
 
-			if (req.session.loggedIn) {
-				res.render("single-post", data);
-			} else {
-				res.redirect("/login");
-			}
+			res.render("single-post", data);
 		})
 		.catch((err) => {
 			console.log(err);
