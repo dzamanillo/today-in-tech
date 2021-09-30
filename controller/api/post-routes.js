@@ -60,7 +60,12 @@ router.get("/:id", (req, res) => {
 				post: post,
 				comments: comments,
 			};
-			res.render("single-post", data);
+
+			if (req.session.loggedIn) {
+				res.render("single-post", data);
+			} else {
+				res.redirect("/login");
+			}
 		})
 		.catch((err) => {
 			console.log(err);
